@@ -6,9 +6,10 @@ seed=ZnO
 
 rm -f fit_Burch.py
 
+
 for ratio in `seq -w 1.5 0.05 1.70`
 do
-
+rm -f results.out
 
 cat >> fit_Burch.py <<EOF
 
@@ -47,7 +48,7 @@ if (not success):
 
 #standard CASTEP units has V in ang^3 and E in eV
 #and B=V*d2E/dV^2 so convert to SI B->B*1.602E-19/10E-30 = B*1.602E11 Pa = B*1.602E2 GPa
-
+print(" Results for c/a= $ratio")
 print("Burch-Murnaghan fit parameters:")
 print("E0 = %10.4f eV"%(params[0]))
 print("B0 = %10.4f eV.ang^-3"%(params[1]))
@@ -57,6 +58,7 @@ print("")
 print("Bulk modulus = %10.4f GPa"%(params[1]*1.602E2))
 print("")
 print("Graph of data and fit saved as BMM_curve.png - please check all is OK")
+print("   ")
 
 col = (np.random.random(), np.random.random(), np.random.random())
 
@@ -79,7 +81,8 @@ plt.savefig('BMM_curve.png')
 EOF
 
 # run python script
-python fit_Burch.py 
-
+python3 fit_Burch.py >> results.out
 done
+
+
 
