@@ -1,0 +1,6 @@
+task     SinglePoint          ! The TASK keyword instructs CASTEP what to do
+xc_functional   PBE           ! Which exchange-correlation functional to use.
+cut_off_energy  500 eV        !
+opt_strategy    speed         ! Choose algorithms for best speed
+spin_polarized : true 
+nextra_bands : 18
